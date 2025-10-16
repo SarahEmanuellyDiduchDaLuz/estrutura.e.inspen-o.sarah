@@ -2,7 +2,6 @@ const taskForm = document.getElementById('taskForm');
 const taskInput = document.getElementById('taskInput');
 const taskList = document.getElementById('taskList');
 
-// Função que cria um item da lista
 function createTaskItem(text) {
   const li = document.createElement('li');
   const span = document.createElement('span');
@@ -13,7 +12,6 @@ function createTaskItem(text) {
   deleteBtn.className = 'delete-btn';
   deleteBtn.type = 'button';
 
-  // Quando clicar no botão "Remover", apaga o item
   deleteBtn.addEventListener('click', () => {
     li.remove();
   });
@@ -35,4 +33,18 @@ taskForm.addEventListener('submit', function (e) {
 
   taskInput.value = '';
   taskInput.focus();
+
+taskList.addEventListener('click', function(e) {
+  const li = e.target.closest('li');
+  if (!li) return;
+ }
+
+if (e.target.classList.contains ('delete-btn')) {
+  li.remove();
+  return; 
+ }
+
+if (e.target.tagName === 'SPAN') {
+  li.classList.toggle('completed');
+ }
 });

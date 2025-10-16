@@ -60,3 +60,8 @@ button:hover {
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
+
+li.complated span {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
