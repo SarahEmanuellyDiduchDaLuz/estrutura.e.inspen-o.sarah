@@ -25,7 +25,6 @@ taskForm.addEventListener('submit', function (e) {
   e.preventDefault();
 
   const text = taskInput.value.trim();
-
   if (!text) return;
 
   const li = createTaskItem(text);
@@ -34,10 +33,10 @@ taskForm.addEventListener('submit', function (e) {
   taskInput.value = '';
   taskInput.focus();
 });
+
 taskList.addEventListener('click', function (e) {
   const li = e.target.closest('li');
   if (!li) return;
-
 
   if (e.target.classList.contains('delete-btn')) {
     li.remove();
@@ -49,11 +48,40 @@ taskList.addEventListener('click', function (e) {
   }
 });
 
-let currentFilyter = 'all';
 taskList.addEventListener('dblclick', function(e) {
-  if (e.target.tagName === 'SPAN'){
+  if (e.target.tagName === 'SPAN') {
     const span = e.target;
     const input = document.createElement('input');
-    input.type
+    input.type = 'text';
+    input.value = span.textContent;
+
+    span.replaceWith(input);
+    input.focus();
+    input.addEventListener('blur', function() {
+      const newSpan = document.createElement('span');
+      newSpan.textContent = input.value.trim() || 'Sem título';
+      input.replaceWith(newSpan);
+    });
   }
+});
+
+let currentFilter = 'all';
+
+document.querySelectorAll('.filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentFilter = btn.dataset.filter;
+    applyFilter();
+  });
+});
+
+function applyFilter() {
+  taskList.querySelectorAll('li').forEach(li => {
+    if (currentFilter === 'all') {
+      li.style.display = '';
+    } else if (currentFilter === 'active') {
+      li.style.display = li.classList.contains('completed') ? 'none' : '';
+    } else if (currentFilter === 'completed') {
+      li.style.display = li.classList.contains('completed') ? '' : 'none';
+    }
+  });
 }
