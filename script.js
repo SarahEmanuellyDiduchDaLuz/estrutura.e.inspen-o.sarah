@@ -48,7 +48,7 @@ taskList.addEventListener('click', function (e) {
   }
 });
 
-taskList.addEventListener('dblclick', function(e) {
+taskList.addEventListener('dblclick', function (e) {
   if (e.target.tagName === 'SPAN') {
     const span = e.target;
     const input = document.createElement('input');
@@ -57,7 +57,7 @@ taskList.addEventListener('dblclick', function(e) {
 
     span.replaceWith(input);
     input.focus();
-    input.addEventListener('blur', function() {
+    input.addEventListener('blur', function () {
       const newSpan = document.createElement('span');
       newSpan.textContent = input.value.trim() || 'Sem título';
       input.replaceWith(newSpan);
