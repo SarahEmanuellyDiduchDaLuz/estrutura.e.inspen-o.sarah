@@ -26,25 +26,34 @@ taskForm.addEventListener('submit', function (e) {
 
   const text = taskInput.value.trim();
 
-  if (!text) return; 
+  if (!text) return;
 
   const li = createTaskItem(text);
   taskList.appendChild(li);
 
   taskInput.value = '';
   taskInput.focus();
-
-taskList.addEventListener('click', function(e) {
+});
+taskList.addEventListener('click', function (e) {
   const li = e.target.closest('li');
   if (!li) return;
- }
 
-if (e.target.classList.contains ('delete-btn')) {
-  li.remove();
-  return; 
- }
 
-if (e.target.tagName === 'SPAN') {
-  li.classList.toggle('completed');
- }
+  if (e.target.classList.contains('delete-btn')) {
+    li.remove();
+    return;
+  }
+
+  if (e.target.tagName === 'SPAN') {
+    li.classList.toggle('completed');
+  }
 });
+
+let currentFilyter = 'all';
+taskList.addEventListener('dblclick', function(e) {
+  if (e.target.tagName === 'SPAN'){
+    const span = e.target;
+    const input = document.createElement('input');
+    input.type
+  }
+}
